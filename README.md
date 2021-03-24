@@ -1,6 +1,6 @@
 # react-native-guess-number app
 
-Project with TODO list. React-Native
+Project "Guess a Number". React-Native
 
 1. Run the project: `npm run start`
 
