@@ -12,6 +12,7 @@ import {
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Colors from '../constants/colors';
+import NumberContainer from '../components/NumberContainer';
 
 const StartGameScreen = () => {
   const [value, setValue] = useState('');
@@ -43,14 +44,27 @@ const StartGameScreen = () => {
 
     setSelectedUserNumber(chosenNumber);
     setIsConfirmed(true);
+    Keyboard.dismiss();
+    // Alert.alert('Chosen Number:',
+    //   `${chosenNumber}`,
+    //   [{text: 'Okay', style: 'default' }]);
     setValue('');
   };
 
   const showChosenNumber = () => {
     return (
-      <Text
-        style={styles.chosenNumberText}
-      >Chosen Number: {selectedUserNumber}</Text>
+      <Card style={styles.summaryContainer}>
+        <Text
+          style={styles.chosenNumberText}
+        >Your Chosen Number:</Text>
+
+        <NumberContainer>{selectedUserNumber}</NumberContainer>
+        <Button title='START GAME' onPress={() => {
+          console.log('->START GAME');
+
+        }} />
+      </Card>
+
     );
   };
 
@@ -127,8 +141,12 @@ const styles = StyleSheet.create({
     width: 80,
     textAlign: 'center',
   },
+  summaryContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
   chosenNumberText: {
-    marginTop: 80,
+    paddingHorizontal: 10,
   },
 });
 
