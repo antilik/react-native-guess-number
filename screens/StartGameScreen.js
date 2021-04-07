@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  TouchableWithoutFeedback,
-  Keyboard,
   Alert,
+  Button,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 
 import Card from '../components/Card';
@@ -14,7 +14,7 @@ import Input from '../components/Input';
 import Colors from '../constants/colors';
 import NumberContainer from '../components/NumberContainer';
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onStartGame }) => {
   const [value, setValue] = useState('');
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [selectedUserNumber, setSelectedUserNumber] = useState();
@@ -38,7 +38,7 @@ const StartGameScreen = () => {
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
       Alert.alert('Invalid number!',
         'Number has to be a number between 1 and 99.',
-        [{text: 'Okay', style: 'destructive', onPress: resetBtnHandler}]);
+        [{ text: 'Okay', style: 'destructive', onPress: resetBtnHandler }]);
       return null;
     }
 
@@ -57,14 +57,14 @@ const StartGameScreen = () => {
         <Text
           style={styles.chosenNumberText}
         >Your Chosen Number:</Text>
-
         <NumberContainer>{selectedUserNumber}</NumberContainer>
-        <Button title='START GAME' onPress={() => {
-          console.log('->START GAME');
-
-        }} />
+        <Button
+          title='START GAME'
+          onPress={() => {
+            onStartGame(selectedUserNumber);
+        }}
+        />
       </Card>
-
     );
   };
 
@@ -74,7 +74,9 @@ const StartGameScreen = () => {
     >
       <View style={styles.screen}>
         <Text style={styles.title}>Start a New Game!</Text>
-        <Card
+        {isConfirmed ? showChosenNumber()
+          :
+          <Card
           style={{
             width: 300,
             maxWidth: '90%',
@@ -112,7 +114,7 @@ const StartGameScreen = () => {
             </View>
           </View>
         </Card>
-        {isConfirmed ? showChosenNumber() : null}
+        }
       </View>
     </TouchableWithoutFeedback>
   );
