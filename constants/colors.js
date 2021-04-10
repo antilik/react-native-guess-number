@@ -1,6 +1,8 @@
 export default {
-  primary: '#c717fc', // #f7287b
+  primary: '#39CCCC', // #f7287b // #c717fc
+  secondary: '#39CCCC', //
   accent: 'red',
-  btnAgree: 'green',
+  btnAgree: '#45B8AC',
   btnDisagree: 'red',
+  btnReset: '#D65076',
 }

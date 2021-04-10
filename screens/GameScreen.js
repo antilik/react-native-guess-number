@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -15,19 +15,45 @@ const GameScreen = ({ userChoice, resetTheGame }) => {
 
   const [currentGuess, setCurrentGuess] = useState(guessNumberBetween(MIN_VALUE, MAX_VALUE, MAX_VALUE));
 
-  const getLowerNumber = () => {
-    highValue.current = currentGuess;
-    setCurrentGuess((prev) => (guessNumberBetween(lowValue.current, prev - 1, prev)));
-  };
+  const nextGuessHandler = (action) => {
+    if ((action === 'lower' && userChoice > currentGuess)
+      || (action === 'higher' && userChoice < currentGuess)) {
+      Alert.alert('Don\'t lie',
+        'You know that this is wrong! Play honestly',
+        [
+          {
+            text: 'Try again!', style: 'cancel', onPress: () => {
+              return null;
+            },
+          },
+        ], { cancelable: true },
+      );
 
-  const getHigherNumber = () => {
-    lowValue.current = currentGuess;
-    setCurrentGuess((prev) => (guessNumberBetween(prev + 1, highValue.current, prev)));
+      return null;
+    }
+
+    if (action === 'higher') {
+      lowValue.current = currentGuess + 1;
+    } else if (action === 'lower') {
+      highValue.current = currentGuess - 1;
+    }
+    setCurrentGuess((prev) => (guessNumberBetween(lowValue.current, highValue.current, prev)));
   };
 
   const resetTheGameHandler = () => {
-    resetExcludeArr();
-    resetTheGame(0);
+    const resetFigures = () => {
+      resetExcludeArr();
+      resetTheGame(0);
+    };
+    Alert.alert('Reset the game', 'Do you agree reset the game?', [
+        { text: 'Agree', style: 'default', onPress: resetFigures },
+        {
+          text: 'Cancel', style: 'cancel', onPress: () => {
+          },
+        },
+      ],
+      { cancelable: true });
+
   };
 
   return (
@@ -45,15 +71,23 @@ const GameScreen = ({ userChoice, resetTheGame }) => {
             <Text style={styles.guessTitle}>Computer's Guess:</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.btnContainer}>
-              <Button title='LOWER' onPress={getLowerNumber} />
-              <Button title='HIGH' onPress={getHigherNumber} />
+              <Button
+                title='LOWER'
+                color={Colors.btnAgree}
+                onPress={nextGuessHandler.bind(this, 'lower')}
+              />
+              <Button
+                title='HIGHER'
+                color={Colors.btnAgree}
+                onPress={nextGuessHandler.bind(this, 'higher')}
+              />
             </Card>
           </View>)
       }
       <View style={styles.resetBtn}>
         <Button
           title='Reset the game'
-          color={Colors.btnDisagree}
+          color={Colors.btnReset}
           onPress={resetTheGameHandler}
         />
       </View>
@@ -66,17 +100,19 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
   },
-  guessTitle: {textAlign: 'center',
+  guessTitle: {
+    marginTop: 80,
+    textAlign: 'center',
   },
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: 80,
     width: 300,
     maxWidth: '80%',
   },
   resetBtn: {
-    marginTop: 200,
+    marginTop: 160,
   },
 });
 
