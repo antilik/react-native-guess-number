@@ -11,8 +11,8 @@ const NumberContainer = (props) => {
 };
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 2,
-    borderColor: Colors.btnAgree,
+    borderWidth: 4,
+    borderColor: Colors.secondary,
     borderRadius: 5,
     marginVertical: 10,
     alignItems: 'center',
