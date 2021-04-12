@@ -11,8 +11,8 @@ import {
 
 import Card from '../components/Card';
 import Input from '../components/Input';
-import Colors from '../constants/colors';
 import NumberContainer from '../components/NumberContainer';
+import Colors from '../constants/colors';
 
 const StartGameScreen = ({ onStartGame }) => {
   const [value, setValue] = useState('');
@@ -45,9 +45,6 @@ const StartGameScreen = ({ onStartGame }) => {
     setSelectedUserNumber(chosenNumber);
     setIsConfirmed(true);
     Keyboard.dismiss();
-    // Alert.alert('Chosen Number:',
-    //   `${chosenNumber}`,
-    //   [{text: 'Okay', style: 'default' }]);
     setValue('');
   };
 
