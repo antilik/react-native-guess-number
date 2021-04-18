@@ -5,6 +5,7 @@ import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
 import { guessNumberBetween } from '../utils/guessNumber';
 import Colors from '../constants/colors';
+import DefaultStyles from '../constants/default-styles';
 
 const GameScreen = ({ userChoice, onGameOver }) => {
   const MIN_VALUE = 1;
@@ -51,18 +52,20 @@ const GameScreen = ({ userChoice, onGameOver }) => {
   return (
     <View style={styles.screen}>
       <View>
-        <Text style={styles.guessTitle}>Computer's Guess:</Text>
+        <Text
+          style={{...DefaultStyles.title, ...styles.guessTitle }}
+        >Computer's Guess:</Text>
         <NumberContainer>{currentGuess}</NumberContainer>
         <Card style={styles.btnContainer}>
           <Button
             title='LOWER'
             color={Colors.btnAgree}
-            onPress={nextGuessHandler.bind(this, 'lower')}
+            onPress={() => nextGuessHandler('lower')}
           />
           <Button
             title='HIGHER'
             color={Colors.btnAgree}
-            onPress={nextGuessHandler.bind(this, 'higher')}
+            onPress={() => nextGuessHandler('higher')}
           />
         </Card>
       </View>
