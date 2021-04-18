@@ -13,6 +13,7 @@ import Card from '../components/Card';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/colors';
+import DefaultStyles from '../constants/default-styles';
 
 const StartGameScreen = ({ onStartGame }) => {
   const [value, setValue] = useState('');
@@ -52,7 +53,7 @@ const StartGameScreen = ({ onStartGame }) => {
     return (
       <Card style={styles.summaryContainer}>
         <Text
-          style={styles.chosenNumberText}
+          style={{...DefaultStyles.text, ...styles.chosenNumberText }}
         >Your Chosen Number:</Text>
         <NumberContainer>{selectedUserNumber}</NumberContainer>
         <Button
@@ -70,7 +71,9 @@ const StartGameScreen = ({ onStartGame }) => {
       onPress={hideKeyboard}
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game!</Text>
+        <Text
+          style={{...DefaultStyles.title, ...styles.title }}
+        >Start a New Game!</Text>
         {isConfirmed ? showChosenNumber()
           :
           <Card
@@ -80,7 +83,7 @@ const StartGameScreen = ({ onStartGame }) => {
             alignItems: 'center',
           }}
         >
-          <Text>Select a Number</Text>
+          <Text style={DefaultStyles.text} >Select a Number</Text>
           <Input
             style={styles.input}
             inputProps={{
@@ -126,6 +129,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 20,
+    fontFamily: 'open-sans-bold',
   },
   buttonsContainer: {
     flexDirection: 'row',
