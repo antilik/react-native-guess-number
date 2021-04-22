@@ -30,14 +30,21 @@ const GameOverScreen = ({resetTheGame, guessRounds, userNumber}) => {
       <Text style={{ ...DefaultStyles.title, ...styles.titleOver }} >The Game is Over!</Text>
       <View style={styles.imageContainer}>
       <Image
-        source={require('../assets/success.png')}
+        fadeDuration={4000}
+        // source={require('../assets/success.png')} // local
+        source={{ uri: ('https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260') }} // web image
         style={styles.imageSuccess}
         resizeMode='cover'
       />
       </View>
-      <Text style={DefaultStyles.text} >Number of rounds: {guessRounds}</Text>
-      <Text style={DefaultStyles.text} >Number was: {userNumber}</Text>
-
+       <View style={styles.textResultsContainer}>
+      <Text
+        style={{ ...DefaultStyles.text, ...styles.resultText }}
+      >Your phone needed{' '}
+        <Text style={styles.textHighlight}>{guessRounds}</Text> rounds to guess the number{' '}
+        <Text style={styles.textHighlight}>{userNumber}</Text>
+      </Text>
+       </View>
       <View style={styles.resetBtn}>
         <Button
           title='Reset the game'
@@ -64,12 +71,24 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 150,
     borderWidth: 3,
-    borderColor: 'gray',
+    borderColor: Colors.btnAgree,
     overflow: 'hidden',
   },
   imageSuccess: {
     width: '100%',
     height: '100%',
+  },
+  textResultsContainer: {
+    marginVertical: 25,
+    width: '90%',
+  },
+  resultText: {
+    textAlign: 'center',
+    fontSize: 18,
+  },
+  textHighlight: {
+    fontFamily: 'open-sans-bold',
+    color: Colors.btnReset,
   },
   resetBtn: {
     marginBottom: 150,
