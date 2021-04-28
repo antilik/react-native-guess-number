@@ -14,6 +14,7 @@ import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/colors';
 import DefaultStyles from '../constants/default-styles';
+import MainButton from '../components/MainButton';
 
 const StartGameScreen = ({ onStartGame }) => {
   const [value, setValue] = useState('');
@@ -56,12 +57,12 @@ const StartGameScreen = ({ onStartGame }) => {
           style={{...DefaultStyles.text, ...styles.chosenNumberText }}
         >Your Chosen Number:</Text>
         <NumberContainer>{selectedUserNumber}</NumberContainer>
-        <Button
-          title='START GAME'
-          onPress={() => {
+        <MainButton
+          color={Colors.btnAgree}
+          onPressHandler={() => {
             onStartGame(selectedUserNumber);
         }}
-        />
+        >START GAME</MainButton>
       </Card>
     );
   };

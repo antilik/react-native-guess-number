@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Alert, Image } from 'react-native';
+import { View, Text, StyleSheet, Alert, Image } from 'react-native';
 
 import { resetExcludeArr } from '../utils/guessNumber';
 import Colors from '../constants/colors';
 import DefaultStyles from '../constants/default-styles';
+import MainButton from '../components/MainButton';
 
 const GameOverScreen = ({resetTheGame, guessRounds, userNumber}) => {
 
@@ -46,11 +47,10 @@ const GameOverScreen = ({resetTheGame, guessRounds, userNumber}) => {
       </Text>
        </View>
       <View style={styles.resetBtn}>
-        <Button
-          title='Reset the game'
+        <MainButton
           color={Colors.btnReset}
-          onPress={resetTheGameHandler}
-        />
+          onPressHandler={resetTheGameHandler}
+        >Reset the game</MainButton>
       </View>
   </View>);
 };
