@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
 import { guessNumberBetween } from '../utils/guessNumber';
 import Colors from '../constants/colors';
 import DefaultStyles from '../constants/default-styles';
+import MainButton from '../components/MainButton';
 
 const GameScreen = ({ userChoice, onGameOver }) => {
   const MIN_VALUE = 1;
@@ -57,16 +58,14 @@ const GameScreen = ({ userChoice, onGameOver }) => {
         >Computer's Guess:</Text>
         <NumberContainer>{currentGuess}</NumberContainer>
         <Card style={styles.btnContainer}>
-          <Button
-            title='LOWER'
+          <MainButton
             color={Colors.btnAgree}
-            onPress={() => nextGuessHandler('lower')}
-          />
-          <Button
-            title='HIGHER'
+            onPressHandler={() => nextGuessHandler('lower')}
+          >Less</MainButton>
+          <MainButton
             color={Colors.btnAgree}
-            onPress={() => nextGuessHandler('higher')}
-          />
+            onPressHandler={() => nextGuessHandler('higher')}
+          >More</MainButton>
         </Card>
       </View>
     </View>);
@@ -86,8 +85,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 80,
-    width: 300,
-    maxWidth: '80%',
+    width: 400,
+    maxWidth: '90%',
   },
 
 });
