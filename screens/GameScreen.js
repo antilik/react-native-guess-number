@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
+import { AntDesign } from  '@expo/vector-icons';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -61,11 +62,15 @@ const GameScreen = ({ userChoice, onGameOver }) => {
           <MainButton
             color={Colors.btnAgree}
             onPressHandler={() => nextGuessHandler('lower')}
-          >Less</MainButton>
+          >
+            <AntDesign name={"minus"} size={24} color={"white"} />
+          </MainButton>
           <MainButton
             color={Colors.btnAgree}
             onPressHandler={() => nextGuessHandler('higher')}
-          >More</MainButton>
+          >
+            <AntDesign name={"plus"} size={24} color={"white"} />
+          </MainButton>
         </Card>
       </View>
     </View>);
